@@ -12,6 +12,7 @@
 
     <modules>
         <module>customer</module>
+        <module>fraud</module>
     </modules>
 
 
@@ -23,6 +24,7 @@
         <spring.boot.dependencies.version>2.5.7</spring.boot.dependencies.version>
     </properties>
 
+<!--    Pool from which other modules will receive their dependencies-->
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -35,9 +37,8 @@
         </dependencies>
     </dependencyManagement>
 
+<!--    Dependecies in parent pom.xml will be available in each Child module that we will create-->
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
