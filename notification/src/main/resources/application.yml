@@ -1,12 +1,12 @@
 server:
-  port: 8081
+  port: 8082
 
 spring:
   application:
-    name: fraud
+    name: notification
   datasource:
     password: root
-    url: jdbc:postgresql://localhost:5432/fraud
+    url: jdbc:postgresql://localhost:5432/notification
     username: root
   jpa:
     hibernate:
@@ -17,7 +17,6 @@ spring:
         format_sql: true
     show-sql: true
 
-#adds this microservice to Eureka Server
 eureka:
   client:
     service-url:

@@ -3,6 +3,7 @@ package org.toutsos.fraud;
 import lombok.*;
 import lombok.extern.slf4j.*;
 import org.springframework.web.bind.annotation.*;
+import org.toutsos.clients.fraud.*;
 
 @RestController
 @AllArgsConstructor

@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>fraud</artifactId>
+    <artifactId>notification</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -18,6 +18,15 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.toutsos</groupId>
+            <artifactId>clients</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -30,15 +39,6 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.toutsos</groupId>
-            <artifactId>clients</artifactId>
-            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

@@ -3,12 +3,17 @@ package org.toutsos.customer;
 import lombok.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.client.*;
+import org.toutsos.clients.fraud.*;
+import org.toutsos.clients.fraud.FraudCheckResponce;
+import org.toutsos.clients.notification.*;
 
 @Service
 @AllArgsConstructor
 public class CustomerService {
     private final CustomerRepository customerRepository;
     private final RestTemplate restTemplate;
+    private final FraudClient fraudClient;
+    private final NotificationClient notificationClient;
     public void registerCustomer(CustomerRegistrattionRequest request){
         Customer customer = Customer
                 .builder()
@@ -35,16 +40,31 @@ public class CustomerService {
             and get their url
             FRAUD name is from microservices properties.yml -> name field
          */
-        FraudCheckResponce fraudCheckResponce = restTemplate.getForObject(
-                "http://FRAUD/api/v1/fraud-check/{customerId}",
-                FraudCheckResponce.class,
-                customer.getId()
-        );
+//        FraudCheckResponce fraudCheckResponce = restTemplate.getForObject(
+//                "http://FRAUD/api/v1/fraud-check/{customerId}",
+//                FraudCheckResponce.class,
+//                customer.getId()
+//        );
+
+        /*
+            This is the same method with the above but:
+                We now are calling an interface instead of directly the controller of Fraud
+                We do not have to create FraudCheckResponce.class in each microservice that we need to connect with Fraud
+         */
+        FraudCheckResponce fraudCheckResponce =
+                fraudClient.isFraudster(customer.getId());
 
         if (fraudCheckResponce.isFraudster()){
             throw new IllegalStateException("fraudster");
         }
 
-        //TODO: send notification
+        //TODO: make it async
+        notificationClient.sendNotification(
+                new NotificationRequest(
+                customer.getId(),
+                String.format("Hi %s welcome to my Spring Microservices Repository",customer.getFirstname()),
+                customer.getEmail()
+                )
+        );
     }
 }
