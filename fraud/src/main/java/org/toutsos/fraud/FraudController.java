@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("api/v1/ ")
+@RequestMapping("api/v1/fraud-check/")
 @Slf4j
 public class FraudController {
 

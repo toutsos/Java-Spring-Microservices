@@ -22,8 +22,21 @@ public class CustomerService {
         //TODO: Check email validation
         //TODO: Check email not taken
         //TODO: Check if fraudster
+
+        /*
+        "http://localhost:8081/api/v1/fraud-check/{customerId}"
+            if we want to hardcode the url that this service will communicate
+            but in this case we cannot use other instances of this service that we may setup
+            for load balancing reasons
+
+        By using FRAUD instead of localhost:8081 we say to the request
+            go to EUREKA server
+            find clients with FRAUD name
+            and get their url
+            FRAUD name is from microservices properties.yml -> name field
+         */
         FraudCheckResponce fraudCheckResponce = restTemplate.getForObject(
-                "http://localhost:8081/api/v1/fraud-check/{customerId}",
+                "http://FRAUD/api/v1/fraud-check/{customerId}",
                 FraudCheckResponce.class,
                 customer.getId()
         );
