@@ -11,7 +11,7 @@ import org.toutsos.clients.notification.*;
 @AllArgsConstructor
 public class CustomerService {
     private final CustomerRepository customerRepository;
-    private final RestTemplate restTemplate;
+//    private final RestTemplate restTemplate;
     private final FraudClient fraudClient;
     private final NotificationClient notificationClient;
     public void registerCustomer(CustomerRegistrattionRequest request){

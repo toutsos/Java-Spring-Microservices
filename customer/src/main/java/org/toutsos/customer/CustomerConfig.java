@@ -13,9 +13,9 @@ public class CustomerConfig {
     even if there is only one
     We do not need this annotation for hardcoded url -> e.x. localhost:8081
      */
-    @Bean
-    @LoadBalanced
-    public RestTemplate restTemplate(){
-        return new RestTemplate();
-    }
+//    @Bean
+//    @LoadBalanced
+//    public RestTemplate restTemplate(){
+//        return new RestTemplate();
+//    }
 }
