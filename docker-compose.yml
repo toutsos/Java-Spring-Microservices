@@ -13,7 +13,6 @@ services:
     networks:
       - postgres
     restart: unless-stopped
-
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4
@@ -28,11 +27,12 @@ services:
     networks:
       - postgres
     restart: unless-stopped
-#  zipkin:
-#    image: openzipkin/zipkin
-#    container_name: zipkin
-#    ports:
-#      - "9411:9411"
+#    zipkin is a trace ui that uses sleuth
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "9411:9411"
 #    networks:
 #      - spring
 #  rabbitmq:
