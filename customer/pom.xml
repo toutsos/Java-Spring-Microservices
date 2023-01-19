@@ -36,6 +36,13 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
+<!--   sleuth adds trace and span id in every request e.x INFO [customer,e22cc0dbc3a97695,e22cc0dbc3a97695]-->
+<!--       it does not need any conf info added in every log-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-sleuth</artifactId>
+        </dependency>
+
         <!-- This is the clients microservice with  -->
         <dependency>
             <groupId>org.toutsos</groupId>
