@@ -1,4 +1,4 @@
-package org.toutsos;
+package org.toutsos.notification;
 
 import lombok.*;
 

@@ -3,6 +3,7 @@ package org.toutsos.customer;
 import lombok.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.client.*;
+import org.toutsos.amqp.*;
 import org.toutsos.clients.fraud.*;
 import org.toutsos.clients.fraud.FraudCheckResponce;
 import org.toutsos.clients.notification.*;
@@ -13,7 +14,9 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
 //    private final RestTemplate restTemplate;
     private final FraudClient fraudClient;
-    private final NotificationClient notificationClient;
+//    private final NotificationClient notificationClient;
+
+    private final RabbitMQMessageProducer rabbitMQMessageProducer;
     public void registerCustomer(CustomerRegistrattionRequest request){
         Customer customer = Customer
                 .builder()
@@ -58,13 +61,26 @@ public class CustomerService {
             throw new IllegalStateException("fraudster");
         }
 
-        //TODO: make it async
-        notificationClient.sendNotification(
+        NotificationRequest notificationRequest =
                 new NotificationRequest(
-                customer.getId(),
-                String.format("Hi %s welcome to my Spring Microservices Repository",customer.getFirstname()),
-                customer.getEmail()
-                )
+                        customer.getId(),
+                        String.format("Hi %s welcome to my Spring Microservices Repository",customer.getFirstname()),
+                        customer.getEmail()
+                );
+
+//        TODO: make it async
+//        COmment out beacuse we use now Messaging
+//        notificationClient.sendNotification(
+//                notificationRequest
+//        );
+
+        //We use the RabbitMQ for sending messages (it is ASYNC)
+        rabbitMQMessageProducer.publish(
+                notificationRequest,
+                "internal.exchange",
+                "internal.notification.routing-key"
         );
+
+
     }
 }

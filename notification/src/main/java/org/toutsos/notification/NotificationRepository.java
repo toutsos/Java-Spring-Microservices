@@ -1,4 +1,4 @@
-package org.toutsos;
+package org.toutsos.notification;
 
 import org.springframework.data.jpa.repository.*;
 

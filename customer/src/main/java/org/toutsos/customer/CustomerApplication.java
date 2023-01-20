@@ -5,7 +5,14 @@ import org.springframework.boot.autoconfigure.*;
 import org.springframework.cloud.netflix.eureka.*;
 import org.springframework.cloud.openfeign.*;
 
-@SpringBootApplication
+
+//We do this in order to be able to inject the RabbitMQMessageProducer
+@SpringBootApplication(
+        scanBasePackages = {
+                "org.toutsos.customer",
+                "org.toutsos.amqp"
+        }
+)
 @EnableEurekaClient
 @EnableFeignClients(
         basePackages = "org.toutsos.clients"
